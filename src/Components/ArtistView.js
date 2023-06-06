@@ -5,6 +5,17 @@ function ArtistView() {
   const { id } = useParams();
   const [artistData, setArtistData] = useState([]);
 
+  const navigate = useNavigate();
+
+  const navButtons = () => {
+    return (
+      <div>
+        <button onClick={() => navigate(-1)}>Back</button> |
+        <button onClick={() => navigate("/")}>Home</button>
+      </div>
+    );
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const API_URL = `http://localhost:4000/album/${id}`;
@@ -30,7 +41,12 @@ function ArtistView() {
       );
     });
 
-  return <div>{display}</div>;
+  return (
+    <div>
+      {navButtons()}
+      {display}
+    </div>
+  );
 }
 
 export default ArtistView;
